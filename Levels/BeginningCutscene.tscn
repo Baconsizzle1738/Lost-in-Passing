@@ -439,3 +439,5 @@ rotate = false
 method_call_mode = 1
 anims/OpeningScene = SubResource( 12 )
 anims/RESET = SubResource( 13 )
+
+[connection signal="animation_finished" from="PlayMoves" to="." method="_on_PlayMoves_animation_finished"]
