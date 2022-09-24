@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://Sprites/Tiles/Dark_tile.png" type="Texture" id=1]
 [ext_resource path="res://Sprites/Tiles/Light_tile.png" type="Texture" id=2]
@@ -15,6 +15,7 @@
 [ext_resource path="res://Pieces/Black/Rook.tscn" type="PackedScene" id=13]
 [ext_resource path="res://Pieces/Black/Knight.tscn" type="PackedScene" id=14]
 [ext_resource path="res://Pieces/Black/Queen.tscn" type="PackedScene" id=15]
+[ext_resource path="res://Levels/BeginningCutscene.gd" type="Script" id=16]
 
 [sub_resource type="ConvexPolygonShape2D" id=3]
 points = PoolVector2Array( 0, 0, 64, 0, 64, 64, 0, 64 )
@@ -70,7 +71,215 @@ points = PoolVector2Array( 0, 0, 64, 0, 64, 64, 0, 64 )
 } ]
 3/z_index = 0
 
+[sub_resource type="Curve2D" id=4]
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, 542, 467, 0, 0, 0, 0, 541, 338, 0, 0, 0, 0, 541, 265, 0, 0, 0, 0, 480, 207, 93.1886, 36.073, -93.1886, -36.073, 311, 128, 145.795, 23.2971, -145.795, -23.2971, 58, 42, 0, 0, 0, 0, -195, 27 )
+}
+
+[sub_resource type="Curve2D" id=5]
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, 542, 156, 0, 0, 0, 0, 541, 282, 0, 0, 0, 0, 479, 346 )
+}
+
+[sub_resource type="Curve2D" id=6]
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, 674, 541, 0, 0, 0, 0, 607, 409 )
+}
+
+[sub_resource type="Curve2D" id=7]
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, 348, 93, 0, 0, 0, 0, 414, 219 )
+}
+
+[sub_resource type="Curve2D" id=8]
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, 481, 471, 0, 0, 0, 0, 478, 346, 82.6673, 3.7576, -82.6673, -3.7576, 318, 319, 90.934, -23.2971, -90.934, 23.2971, 175, 331, 88.6795, -71.3945, -88.6795, 71.3945, 18, 429, 0, 0, 0, 0, -149, 575 )
+}
+
+[sub_resource type="Curve2D" id=9]
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, 608, 540, 0, 0, 0, 0, 416, 352 )
+}
+
+[sub_resource type="Curve2D" id=10]
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, 669, 90, 0, 0, 0, 0, 606, 216 )
+}
+
+[sub_resource type="Curve2D" id=11]
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, 478, 156, 0, 0, 0, 0, 479, 280, 108.219, -131.516, -108.219, 131.516, 62, 432, 0, 0, 0, 0, -71, 631 )
+}
+
+[sub_resource type="Animation" id=12]
+resource_name = "OpeningScene"
+length = 27.0
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("White_E_Pawn/Enpassant:offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 125.59, -0.25, 0, 0.25, 0, 125.59, -0.25, 0, 0.25, 0, 193.22, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 2, 2.5, 10, 10.5 )
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath("Black_E_Pawn/exd4:offset")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 121, -0.25, 0, 0.25, 0, 121, -0.25, 0, 0.25, 0, 214.88, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 3, 3.5, 7, 7.5 )
+}
+tracks/2/type = "bezier"
+tracks/2/path = NodePath("White_F_Knight/Nf3:offset")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 148.01, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 4, 4.5 )
+}
+tracks/3/type = "bezier"
+tracks/3/path = NodePath("Black_B_Knight/Nc6:offset")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 142.3, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 5, 5.5 )
+}
+tracks/4/type = "bezier"
+tracks/4/path = NodePath("White_D_Pawn/d4_die:offset")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 122.72, -0.25, 0, 0.25, 0, 122.72, -0.25, 0, 0.25, 0, 842.66, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 6, 6.5, 7.3, 7.7 )
+}
+tracks/5/type = "bezier"
+tracks/5/path = NodePath("White_L_Bishop/Bc4:offset")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 266, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 8, 8.5 )
+}
+tracks/6/type = "bezier"
+tracks/6/path = NodePath("Black_F_Knight/Nf6:offset")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 139.42, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 9, 9.5 )
+}
+tracks/7/type = "bezier"
+tracks/7/path = NodePath("Black_D_Pawn/d5_die:offset")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 118.81, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 11, 11.5 )
+}
+
+[sub_resource type="Animation" id=13]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("White_E_Pawn/Enpassant:offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath("Black_E_Pawn/exd4:offset")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/2/type = "bezier"
+tracks/2/path = NodePath("White_F_Knight/Nf3:offset")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/3/type = "bezier"
+tracks/3/path = NodePath("Black_B_Knight/Nc6:offset")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/4/type = "bezier"
+tracks/4/path = NodePath("White_D_Pawn/d4_die:offset")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/5/type = "bezier"
+tracks/5/path = NodePath("White_L_Bishop/Bc4:offset")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/6/type = "bezier"
+tracks/6/path = NodePath("Black_F_Knight/Nf6:offset")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/7/type = "bezier"
+tracks/7/path = NodePath("Black_D_Pawn/d5_die:offset")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+
 [node name="Node2D" type="Node2D"]
+script = ExtResource( 16 )
 
 [node name="NormalChess" type="TileMap" parent="."]
 tile_set = SubResource( 2 )
@@ -86,12 +295,6 @@ position = Vector2( 351, 478 )
 [node name="Pawn3" parent="." instance=ExtResource( 4 )]
 position = Vector2( 414, 479 )
 
-[node name="Pawn4" parent="." instance=ExtResource( 4 )]
-position = Vector2( 481, 480 )
-
-[node name="Pawn5" parent="." instance=ExtResource( 4 )]
-position = Vector2( 539, 480 )
-
 [node name="Pawn6" parent="." instance=ExtResource( 4 )]
 position = Vector2( 605, 479 )
 
@@ -102,22 +305,16 @@ position = Vector2( 672, 478 )
 position = Vector2( 735, 478 )
 
 [node name="Queen" parent="." instance=ExtResource( 5 )]
-position = Vector2( 475, 542 )
+position = Vector2( 478, 545 )
 
 [node name="King" parent="." instance=ExtResource( 6 )]
-position = Vector2( 549, 545 )
+position = Vector2( 544, 545 )
 
 [node name="Bishop" parent="." instance=ExtResource( 9 )]
 position = Vector2( 413, 546 )
 
-[node name="Bishop2" parent="." instance=ExtResource( 9 )]
-position = Vector2( 609, 541 )
-
 [node name="Knight" parent="." instance=ExtResource( 8 )]
 position = Vector2( 349, 542 )
-
-[node name="Knight2" parent="." instance=ExtResource( 8 )]
-position = Vector2( 669, 542 )
 
 [node name="Rook" parent="." instance=ExtResource( 7 )]
 position = Vector2( 287, 543 )
@@ -133,12 +330,6 @@ position = Vector2( 347, 154 )
 
 [node name="B_Pawn3" parent="." instance=ExtResource( 10 )]
 position = Vector2( 411, 155 )
-
-[node name="B_Pawn4" parent="." instance=ExtResource( 10 )]
-position = Vector2( 480, 158 )
-
-[node name="B_Pawn5" parent="." instance=ExtResource( 10 )]
-position = Vector2( 547, 160 )
 
 [node name="B_Pawn6" parent="." instance=ExtResource( 10 )]
 position = Vector2( 609, 159 )
@@ -161,14 +352,90 @@ position = Vector2( 416, 94 )
 [node name="B_Bishop2" parent="." instance=ExtResource( 12 )]
 position = Vector2( 599, 97 )
 
-[node name="B_Knight" parent="." instance=ExtResource( 14 )]
-position = Vector2( 346, 94 )
-
-[node name="B_Knight2" parent="." instance=ExtResource( 14 )]
-position = Vector2( 671, 93 )
-
 [node name="B_Rook" parent="." instance=ExtResource( 13 )]
 position = Vector2( 285, 94 )
 
 [node name="B_Rook2" parent="." instance=ExtResource( 13 )]
 position = Vector2( 735, 95 )
+
+[node name="White_E_Pawn" type="Path2D" parent="."]
+curve = SubResource( 4 )
+
+[node name="Enpassant" type="PathFollow2D" parent="White_E_Pawn"]
+position = Vector2( 542, 467 )
+rotation = -1.56253
+rotate = false
+
+[node name="Pawn5" parent="White_E_Pawn/Enpassant" instance=ExtResource( 4 )]
+rotation = 1.5708
+
+[node name="Black_E_Pawn" type="Path2D" parent="."]
+curve = SubResource( 5 )
+
+[node name="exd4" type="PathFollow2D" parent="Black_E_Pawn"]
+position = Vector2( 542, 156 )
+rotation = 1.57988
+rotate = false
+
+[node name="B_Pawn6" parent="Black_E_Pawn/exd4" instance=ExtResource( 10 )]
+position = Vector2( 0, 3.05176e-05 )
+rotation = 4.69494
+
+[node name="White_F_Knight" type="Path2D" parent="."]
+curve = SubResource( 6 )
+
+[node name="Nf3" type="PathFollow2D" parent="White_F_Knight"]
+position = Vector2( 674, 541 )
+rotate = false
+
+[node name="Knight2" parent="White_F_Knight/Nf3" instance=ExtResource( 8 )]
+
+[node name="Black_B_Knight" type="Path2D" parent="."]
+curve = SubResource( 7 )
+
+[node name="Nc6" type="PathFollow2D" parent="Black_B_Knight"]
+position = Vector2( 348, 93 )
+rotate = false
+
+[node name="B_Knight" parent="Black_B_Knight/Nc6" instance=ExtResource( 14 )]
+
+[node name="White_D_Pawn" type="Path2D" parent="."]
+curve = SubResource( 8 )
+
+[node name="d4_die" type="PathFollow2D" parent="White_D_Pawn"]
+position = Vector2( 481, 471 )
+rotate = false
+
+[node name="Pawn4" parent="White_D_Pawn/d4_die" instance=ExtResource( 4 )]
+
+[node name="White_L_Bishop" type="Path2D" parent="."]
+curve = SubResource( 9 )
+
+[node name="Bc4" type="PathFollow2D" parent="White_L_Bishop"]
+position = Vector2( 608, 540 )
+rotate = false
+
+[node name="Bishop2" parent="White_L_Bishop/Bc4" instance=ExtResource( 9 )]
+
+[node name="Black_F_Knight" type="Path2D" parent="."]
+curve = SubResource( 10 )
+
+[node name="Nf6" type="PathFollow2D" parent="Black_F_Knight"]
+position = Vector2( 669, 90 )
+rotate = false
+
+[node name="B_Knight2" parent="Black_F_Knight/Nf6" instance=ExtResource( 14 )]
+
+[node name="Black_D_Pawn" type="Path2D" parent="."]
+curve = SubResource( 11 )
+
+[node name="d5_die" type="PathFollow2D" parent="Black_D_Pawn"]
+position = Vector2( 478, 156 )
+rotate = false
+
+[node name="B_Pawn5" parent="Black_D_Pawn/d5_die" instance=ExtResource( 10 )]
+
+[node name="PlayMoves" type="AnimationPlayer" parent="."]
+method_call_mode = 1
+anims/OpeningScene = SubResource( 12 )
+anims/RESET = SubResource( 13 )
