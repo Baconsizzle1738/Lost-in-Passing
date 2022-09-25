@@ -11,8 +11,9 @@ config_version=4
 [application]
 
 config/name="Lost In Passing"
-run/main_scene="res://Levels/BeginningCutscene.tscn"
-config/icon="res://icon.png"
+run/main_scene="res://Levels/Title.tscn"
+config/icon="res://Misc/Icon.png"
+config/windows_native_icon="res://Misc/Icon.ico"
 
 [display]
 

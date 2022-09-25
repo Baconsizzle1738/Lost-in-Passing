@@ -1,6 +1,7 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Sprites/Pieces/Void/CorruptPawn.png" type="Texture" id=1]
+[ext_resource path="res://Pieces/Void/VoidPawn.gd" type="Script" id=2]
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 1 )
@@ -23,9 +24,10 @@ animations = [ {
 } ]
 
 [sub_resource type="RectangleShape2D" id=5]
-extents = Vector2( 8.00195, 8.00195 )
+extents = Vector2( 6.50098, 6.50098 )
 
 [node name="Pawn" type="KinematicBody2D"]
+script = ExtResource( 2 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 4 )
@@ -41,3 +43,14 @@ scale = Vector2( 2.225, 2.175 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource( 5 )
+
+[node name="moves" type="Node2D" parent="."]
+
+[node name="down" type="RayCast2D" parent="moves"]
+enabled = true
+cast_to = Vector2( 0, 64 )
+collision_mask = 4
+collide_with_areas = true
+
+[connection signal="screen_entered" from="VisibilityEnabler2D" to="." method="_on_VisibilityEnabler2D_screen_entered"]
+[connection signal="screen_exited" from="VisibilityEnabler2D" to="." method="_on_VisibilityEnabler2D_screen_exited"]

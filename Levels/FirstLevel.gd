@@ -7,8 +7,13 @@ var pos = Vector2(0,0);
 var playerMoving = false;
 var dir = "";
 var deez = false;
-
+var killing = false;
+var enemyMoving = false;
+const MOVEBOX = preload("res://Pieces/Entities/MoveBox.tscn");
+var moveboxes = ["goRight", "goLeft", "goUp", "goCaptureLeft", "goCaptureRight"];
+var displayMoves = false;
 const PLAYER = preload("res://Pieces/Entities/PlayerPawn.tscn");
+
 #move to player
 #var vol = Vector2();
 
@@ -19,7 +24,7 @@ func _ready():
 
 func _input(event):
 	
-	if !cutscene and !playerMoving:
+	if !cutscene and !playerMoving and playerTurn:
 		#print(event.to_string());
 		if event.is_action_pressed("click"):
 			$Player.piss = false;
@@ -32,16 +37,20 @@ func _input(event):
 				#print(hit.getRect())
 				if hit.get_children()[0].getRect().has_point(get_global_mouse_position()):
 					dir = hit.get_name();
-					#if dir == "CaptureLeft" and $Player.canCaptureLeft or dir == "CaptureRight" and $Player.canCaptureRight:
-					pos = $Player.global_position;
-					#print(pos);
-					target = hit.get_children()[0].global_position;
-					#print(hit.get_name());
-					dir = hit.get_name();
-					#speed is porportioal to the distance
-					$Player.vol = pos.direction_to(target) * pos.distance_to(target)/0.5;
-					playerMoving = true;
-					break;
+					print($Player.canGoHere(dir))
+					if $Player.canGoHere(dir):
+						unDisplayMoves();
+						#if dir == "CaptureLeft" and $Player.canCaptureLeft or dir == "CaptureRight" and $Player.canCaptureRight:
+						pos = $Player.global_position;
+						#print(pos);
+						target = hit.get_children()[0].global_position;
+						#print(hit.get_name());
+						dir = hit.get_name();
+						#speed is porportioal to the distance
+						$Player.vol = pos.direction_to(target) * pos.distance_to(target)/0.5;
+						playerMoving = true;
+						break;
+					
 					#elif dir != "CaptureLeft" and dir != "CaptureRight":
 					#	pos = $Player.global_position;
 					#	print(pos);
@@ -55,13 +64,33 @@ func _input(event):
 					
 		#target = get_global_mouse_position();
 
+func displayMoves():
+	for hit in $Player/PossibleMoves.get_children():
+		var name = hit.get_name();
+		if $Player.canGoHere(name):
+			var box = MOVEBOX.instance();
+			box.global_position = hit.get_children()[0].global_position;
+			box.name = "go" + hit.name;
+			add_child(box);
+			displayMoves = true;
+
+func unDisplayMoves():
+	for thing in get_children():
+		for name in moveboxes:
+			if name == thing.name:
+				thing.queue_free();
+	displayMoves = false;
 
 func _physics_process(delta):
 	if deez:
 		$Player.piss = true;
 	
+	if !displayMoves and playerTurn and !playerMoving and !cutscene:
+		displayMoves();
+	
 	if playerMoving:
-		if $Player.global_position.distance_to(target) <= 3:
+		#if player goes within a threshold then 
+		if $Player.global_position.distance_to(target) <= 4:
 			$Player.vol = Vector2(0,0);
 			
 			$Player.global_position = target;
@@ -89,6 +118,51 @@ func _physics_process(delta):
 			playerMoving = false;
 			playerTurn = false;
 			#player velocity is 0 when near the target
+	if !playerMoving and !playerTurn and !cutscene and !enemyMoving:
+		#check if any enemies can see the player
+		#if they do they go to player
+		for enemy in $enemies.get_children():
+			var epos = enemy.global_position;
+			if enemy.inScreen:
+				if enemy.canSeePlayer():
+					enemy.target = $Player.global_position;
+					killing = true;
+					enemy.moving = true;
+					enemy.vol = epos.direction_to(target) * epos.distance_to(target)/0.5;
+					enemyMoving = true;
+				
+				#no enemies see player, 1 in 10 chance to move somewhere random
+				else:
+					var random = randi()%10;
+					if random == 1:
+						
+						enemy.target = enemy.getRandomMove().get_cast_to() + enemy.global_position;
+						#print (enemy.name, epos, enemy.target)
+						enemy.moving = true;
+						enemy.vol = epos.direction_to(enemy.target) * epos.distance_to(enemy.target)/0.5;
+						print(enemy.name, epos, enemy.target, epos.direction_to(target), epos.distance_to(target)/0.5)
+						enemyMoving = true;
+	
+	
+	if !cutscene:
+		#promotions first, then death.
+		for promo in $promotionSquares.get_children():
+			#a promo is one promotion square object
+			for thing in promo.getArea().get_overlapping_areas():
+				print(thing.name);
+				if thing.name == "PlayerHitbox":
+					get_tree().change_scene("res://Levels/Win.tscn");
+			
+		
+		if $Player/PlayerHitbox.get_overlapping_areas().size() > 0:
+			if $Player/PlayerHitbox.get_overlapping_areas()[0].name != "Promote":
+				get_tree().change_scene("res://Levels/death.tscn");
+			
+		
+		
+
+
+
 
 
 func _on_Bounce_animation_finished(anim_name):

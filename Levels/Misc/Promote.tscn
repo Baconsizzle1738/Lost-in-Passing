@@ -1,6 +1,7 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://Sprites/Tiles/Promote.png" type="Texture" id=1]
+[ext_resource path="res://Levels/Misc/Promote.gd" type="Script" id=2]
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 1 )
@@ -62,14 +63,15 @@ animations = [ {
 extents = Vector2( 3.5, 3.5 )
 
 [node name="Node2D" type="Node2D"]
+script = ExtResource( 2 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 13 )
 animation = "active"
-frame = 3
+frame = 5
 playing = true
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="Promote" type="Area2D" parent="."]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="Promote" type="CollisionShape2D" parent="Promote"]
 shape = SubResource( 14 )
