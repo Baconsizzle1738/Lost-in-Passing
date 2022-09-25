@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Sprites/Pieces/White/White_Pawn.png" type="Texture" id=1]
 [ext_resource path="res://Pieces/Entities/PlayerPawn.gd" type="Script" id=2]
@@ -9,9 +9,12 @@
 [ext_resource path="res://Pieces/Entities/Up.gd" type="Script" id=7]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 8, 8 )
+extents = Vector2( 11, 11 )
 
 [sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 12.5, 12.5 )
+
+[sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 12.5, 12.5 )
 
 [node name="Player" type="KinematicBody2D"]
@@ -27,6 +30,8 @@ current = true
 shape = SubResource( 1 )
 
 [node name="PossibleMoves" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 2
 
 [node name="Right" type="CollisionShape2D" parent="PossibleMoves"]
 position = Vector2( 64, 0 )
@@ -52,3 +57,19 @@ script = ExtResource( 5 )
 position = Vector2( 64, -64 )
 shape = SubResource( 2 )
 script = ExtResource( 4 )
+
+[node name="CheckLeft" type="Area2D" parent="."]
+visible = false
+
+[node name="CheckLeft" type="CollisionShape2D" parent="CheckLeft"]
+position = Vector2( -64, -64 )
+shape = SubResource( 3 )
+disabled = true
+
+[node name="CheckRight" type="Area2D" parent="."]
+visible = false
+
+[node name="CheckRight" type="CollisionShape2D" parent="CheckRight"]
+position = Vector2( 64, -64 )
+shape = SubResource( 3 )
+disabled = true
