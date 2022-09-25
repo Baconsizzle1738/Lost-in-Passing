@@ -24,18 +24,18 @@ func _input(event):
 		if event.is_action_pressed("click"):
 			$Player.piss = false;
 			deez = false;
-			print("CLICK");
+			#print("CLICK");
 			#loop thru all the possible moves
 			for hit in $Player/PossibleMoves.get_children():
 				#print($Falling/Bounce/Player/PossibleMoves.get_children());
 				#check to see if mouse is in hitbox, then set the target location of movement to the position selected
 				#print(hit.getRect())
-				if hit.getRect().has_point(get_global_mouse_position()):
+				if hit.get_children()[0].getRect().has_point(get_global_mouse_position()):
 					dir = hit.get_name();
 					#if dir == "CaptureLeft" and $Player.canCaptureLeft or dir == "CaptureRight" and $Player.canCaptureRight:
 					pos = $Player.global_position;
-					print(pos);
-					target = hit.global_position;
+					#print(pos);
+					target = hit.get_children()[0].global_position;
 					#print(hit.get_name());
 					dir = hit.get_name();
 					#speed is porportioal to the distance
@@ -60,7 +60,7 @@ func _physics_process(delta):
 	if deez:
 		$Player.piss = true;
 	
-	if playerMoving and playerTurn:
+	if playerMoving:
 		if $Player.global_position.distance_to(target) <= 3:
 			$Player.vol = Vector2(0,0);
 			

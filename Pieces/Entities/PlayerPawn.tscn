@@ -29,31 +29,39 @@ current = true
 [node name="Hitbox" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
 
-[node name="PossibleMoves" type="Area2D" parent="."]
-collision_layer = 2
-collision_mask = 2
+[node name="PossibleMoves" type="Node2D" parent="."]
 
-[node name="Right" type="CollisionShape2D" parent="PossibleMoves"]
+[node name="Right" type="Area2D" parent="PossibleMoves"]
+
+[node name="Right" type="CollisionShape2D" parent="PossibleMoves/Right"]
 position = Vector2( 64, 0 )
 shape = SubResource( 2 )
 script = ExtResource( 3 )
 
-[node name="Left" type="CollisionShape2D" parent="PossibleMoves"]
+[node name="Left" type="Area2D" parent="PossibleMoves"]
+
+[node name="Left" type="CollisionShape2D" parent="PossibleMoves/Left"]
 position = Vector2( -64, 0 )
 shape = SubResource( 2 )
 script = ExtResource( 6 )
 
-[node name="Up" type="CollisionShape2D" parent="PossibleMoves"]
+[node name="Up" type="Area2D" parent="PossibleMoves"]
+
+[node name="Up" type="CollisionShape2D" parent="PossibleMoves/Up"]
 position = Vector2( 0, -64 )
 shape = SubResource( 2 )
 script = ExtResource( 7 )
 
-[node name="CaptureLeft" type="CollisionShape2D" parent="PossibleMoves"]
+[node name="CaptureLeft" type="Area2D" parent="PossibleMoves"]
+
+[node name="CaptureLeft" type="CollisionShape2D" parent="PossibleMoves/CaptureLeft"]
 position = Vector2( -64, -64 )
 shape = SubResource( 2 )
 script = ExtResource( 5 )
 
-[node name="CaptureRight" type="CollisionShape2D" parent="PossibleMoves"]
+[node name="CaptureRight" type="Area2D" parent="PossibleMoves"]
+
+[node name="CaptureRight" type="CollisionShape2D" parent="PossibleMoves/CaptureRight"]
 position = Vector2( 64, -64 )
 shape = SubResource( 2 )
 script = ExtResource( 4 )
