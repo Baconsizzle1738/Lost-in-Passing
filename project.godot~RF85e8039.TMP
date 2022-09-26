@@ -12,9 +12,8 @@ config_version=4
 
 config/name="Lost In Passing"
 run/main_scene="res://Levels/Title.tscn"
-boot_splash/image="res://Misc/boot screen.png"
-config/icon="res://Misc/icon.png"
-config/windows_native_icon="res://Misc/icon.ico"
+config/icon="res://Misc/Icon.png"
+config/windows_native_icon="res://Misc/Icon.ico"
 
 [display]
 
